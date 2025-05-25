@@ -1,7 +1,4 @@
-"use client";
-
-import { useState, useCallback, useEffect } from "react";
-import { useRouter } from "next/navigation";
+"use client"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -10,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, FileText, X, CheckCircle2, Clock, ArrowRight, Shield, Zap, Target, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { useDropzone } from "react-dropzone";
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ModeToggle";
 import { motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 interface DurationOption {
   value: string;
@@ -22,8 +21,8 @@ interface DurationOption {
 }
 
 export default function ResumeUpload() {
-  const router = useRouter();
   const { theme } = useTheme();
+  const router = useRouter()
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -240,7 +239,7 @@ export default function ResumeUpload() {
                   theme === "dark" ? "text-gray-300" : "text-slate-600"
                 )}
               >
-                Upload your resume and get personalized interview questions tailored to your experience and the role you're targeting
+                Upload your resume to get personalized interview questions tailored to your experience
               </p>
 
               {/* Feature Pills */}
@@ -292,12 +291,12 @@ export default function ResumeUpload() {
                               ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
                               : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
                             : currentStep > step
-                            ? theme === "dark"
-                              ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
-                              : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
-                            : theme === "dark"
-                            ? "bg-gray-700 text-gray-400 border-2 border-gray-600"
-                            : "bg-white text-slate-400 border-2 border-slate-200 shadow-sm"
+                              ? theme === "dark"
+                                ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
+                                : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
+                              : theme === "dark"
+                                ? "bg-gray-700 text-gray-400 border-2 border-gray-600"
+                                : "bg-white text-slate-400 border-2 border-slate-200 shadow-sm"
                         )}
                       >
                         {currentStep > step ? (
@@ -314,12 +313,12 @@ export default function ResumeUpload() {
                               ? "text-indigo-400"
                               : "text-indigo-600"
                             : currentStep > step
-                            ? theme === "dark"
-                              ? "text-emerald-400"
-                              : "text-emerald-600"
-                            : theme === "dark"
-                            ? "text-gray-400"
-                            : "text-slate-400"
+                              ? theme === "dark"
+                                ? "text-emerald-400"
+                                : "text-emerald-600"
+                              : theme === "dark"
+                                ? "text-gray-400"
+                                : "text-slate-400"
                         )}
                       >
                         {step === 1 ? "Upload Resume" : step === 2 ? "Configure" : "Start Interview"}
@@ -339,8 +338,8 @@ export default function ResumeUpload() {
                                 ? "bg-gradient-to-r from-indigo-500 to-purple-500"
                                 : "bg-gray-700"
                               : currentStep > step
-                              ? "bg-gradient-to-r from-indigo-600 to-purple-600"
-                              : "bg-slate-200"
+                                ? "bg-gradient-to-r from-indigo-600 to-purple-600"
+                                : "bg-slate-200"
                           )}
                         />
                       </div>
@@ -406,12 +405,12 @@ export default function ResumeUpload() {
                             ? "border-indigo-400 bg-indigo-900/30 scale-[0.98] shadow-inner"
                             : "border-indigo-400 bg-indigo-50 scale-[0.98] shadow-inner"
                           : file
-                          ? theme === "dark"
-                            ? "border-emerald-400 bg-emerald-900/30"
-                            : "border-emerald-400 bg-emerald-50"
-                          : theme === "dark"
-                          ? "border-gray-600 hover:border-indigo-400 hover:bg-indigo-900/20"
-                          : "border-slate-300 hover:border-indigo-400 hover:bg-slate-50"
+                            ? theme === "dark"
+                              ? "border-emerald-400 bg-emerald-900/30"
+                              : "border-emerald-400 bg-emerald-50"
+                            : theme === "dark"
+                              ? "border-gray-600 hover:border-indigo-400 hover:bg-indigo-900/20"
+                              : "border-slate-300 hover:border-indigo-400 hover:bg-slate-50"
                       )}
                       role="region"
                       aria-label="Dropzone for PDF resume upload"
@@ -559,7 +558,7 @@ export default function ResumeUpload() {
                             "rounded-xl p-4 border",
                             theme === "dark"
                               ? "bg-gray-700/60 border-gray-600"
-                              : "bg-slate-50 border-slate-200"
+                              : "bg-slate-50 border-gray-200"
                           )}
                         >
                           <div className="flex items-center space-x-3">
@@ -608,68 +607,68 @@ export default function ResumeUpload() {
                           </div>
                         </motion.div>
                       )}
-
-                      <div className="space-y-4">
-                        <Label
-                          className={cn(
-                            "text-lg font-semibold flex items-center space-x-2",
-                            theme === "dark" ? "text-gray-200" : "text-slate-900"
-                          )}
-                        >
-                          <Clock
+                      <div className="space-y-6">
+                        <div className="space-y-4">
+                          <Label
                             className={cn(
-                              "h-5 w-5",
-                              theme === "dark" ? "text-indigo-400" : "text-indigo-600"
+                              "text-lg font-semibold flex items-center space-x-2",
+                              theme === "dark" ? "text-gray-200" : "text-slate-900"
                             )}
-                          />
-                          <span>Interview Duration</span>
-                        </Label>
-                        <div className="relative">
-                          <select
-                            value={interviewDuration}
-                            onChange={(e) => setInterviewDuration(e.target.value)}
-                            className={cn(
-                              "w-full p-4 rounded-xl text-sm font-medium appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200",
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200 hover:border-indigo-400"
-                                : "bg-white border-slate-200 text-slate-900 hover:border-indigo-400"
-                            )}
-                            aria-label="Select interview duration"
                           >
-                            {durationOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                                {option.recommended ? " (Recommended)" : ""}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown
+                            <Clock
+                              className={cn(
+                                "h-5 w-5",
+                                theme === "dark" ? "text-indigo-400" : "text-indigo-600"
+                              )}
+                            />
+                            <span>Interview Duration</span>
+                          </Label>
+                          <div className="relative">
+                            <select
+                              value={interviewDuration}
+                              onChange={(e) => setInterviewDuration(e.target.value)}
+                              className={cn(
+                                "w-full p-4 rounded-xl text-sm font-medium appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-all duration-200",
+                                theme === "dark"
+                                  ? "bg-gray-800 border-gray-600 text-gray-200 hover:border-indigo-500"
+                                  : "bg-white border-gray-300 text-gray-900 hover:border-indigo-400"
+                              )}
+                              aria-label="Select interview duration"
+                            >
+                              {durationOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                  {option.recommended ? " (Recommended)" : ""}
+                                </option>
+                              ))}
+                            </select>
+                            <ChevronDown
+                              className={cn(
+                                "absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5",
+                                theme === "dark" ? "text-gray-400" : "text-gray-400"
+                              )}
+                            />
+                          </div>
+                          <div
                             className={cn(
-                              "absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5",
-                              theme === "dark" ? "text-gray-400" : "text-slate-400"
+                              "border rounded-lg p-4",
+                              theme === "dark"
+                                ? "bg-blue-900/20 border-blue-800/50 text-blue-100"
+                                : "bg-blue-50 border-blue-200 text-blue-700"
                             )}
-                          />
-                        </div>
-                        <div
-                          className={cn(
-                            "border rounded-xl p-4",
-                            theme === "dark"
-                              ? "bg-blue-900/50 border-blue-800 text-blue-300"
-                              : "bg-blue-50 border-blue-200 text-blue-700"
-                          )}
-                        >
-                          <p className="text-sm">
-                            <strong>{formatDuration(interviewDuration)}</strong> provides time for approximately{" "}
-                            <strong>
-                              {Math.floor(parseInt(interviewDuration) / 60)}-{Math.ceil(parseInt(interviewDuration) / 45)}
-                            </strong>{" "}
-                            questions, perfect for a comprehensive interview experience.
-                          </p>
+                          >
+                            <p className="text-sm">
+                              <strong>{formatDuration(interviewDuration)}</strong> provides time for approximately{" "}
+                              <strong>
+                                {Math.floor(parseInt(interviewDuration) / 60)}-{Math.ceil(parseInt(interviewDuration) / 60)}
+                              </strong>{" "}
+                              questions, perfect for a comprehensive interview experience.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   )}
-
                   {currentStep === 3 && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
@@ -681,7 +680,7 @@ export default function ResumeUpload() {
                         className={cn(
                           "p-6 rounded-2xl border",
                           theme === "dark"
-                            ? "bg-gradient-to-br from-emerald-900/50 to-teal-900/50 border-emerald-800"
+                            ? "bg-gradient-to-br from-emerald-900/30 to-teal-900/30 border-emerald-700/50"
                             : "bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200"
                         )}
                       >
@@ -689,8 +688,8 @@ export default function ResumeUpload() {
                           className={cn(
                             "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4",
                             theme === "dark"
-                              ? "bg-gradient-to-br from-emerald-500 to-teal-500"
-                              : "bg-gradient-to-br from-emerald-500 to-teal-500"
+                              ? "bg-gradient-to-br from-emerald-600 to-teal-500"
+                              : "bg-gradient-to-br from-emerald-500 to-teal-400"
                           )}
                         >
                           <CheckCircle2 className="h-8 w-8 text-white" />
@@ -698,25 +697,25 @@ export default function ResumeUpload() {
                         <h3
                           className={cn(
                             "text-2xl font-bold mb-2",
-                            theme === "dark" ? "text-white" : "text-slate-900"
+                            theme === "dark" ? "text-white" : "text-gray-800"
                           )}
                         >
-                          All Set to Begin!
+                          All Set!
                         </h3>
                         <p
                           className={cn(
                             "mb-4",
-                            theme === "dark" ? "text-gray-300" : "text-slate-600"
+                            theme === "dark" ? "text-gray-300" : "text-gray-600"
                           )}
                         >
-                          Your personalized {formatDuration(interviewDuration)} interview experience is ready
+                          Your personalized {formatDuration(interviewDuration)} interview is ready.
                         </p>
                         <div
                           className={cn(
-                            "rounded-xl p-4 border",
+                            "rounded-lg p-4 border",
                             theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-emerald-200 text-slate-700"
+                              ? "bg-gray-800/50 border-gray-700 text-gray-200"
+                              : "bg-white border-gray-200 text-gray-700"
                           )}
                         >
                           <p className="text-sm">
@@ -726,19 +725,18 @@ export default function ResumeUpload() {
                       </div>
                     </motion.div>
                   )}
-
                   {(uploading || uploadProgress > 0) && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="space-y-4 mt-6"
+                      className="mt-6 space-y-4"
                     >
                       <div className="flex justify-between items-center">
                         <span
                           className={cn(
-                            "text-sm font-medium",
-                            theme === "dark" ? "text-gray-200" : "text-slate-700"
+                            "text-sm font-semibold",
+                            theme === "dark" ? "text-gray-200" : "text-gray-700"
                           )}
                         >
                           {uploadProgress < 100 ? "Processing your resume..." : "Preparing your interview..."}
@@ -756,7 +754,7 @@ export default function ResumeUpload() {
                         value={uploadProgress}
                         className={cn(
                           "h-3",
-                          theme === "dark" ? "bg-gray-700" : "bg-slate-100",
+                          theme === "dark" ? "bg-gray-700" : "bg-gray-100",
                           "[&>div]:bg-gradient-to-r",
                           uploadProgress < 100
                             ? "[&>div]:from-indigo-500 [&>div]:to-purple-500"
@@ -766,13 +764,12 @@ export default function ResumeUpload() {
                     </motion.div>
                   )}
                 </CardContent>
-
                 <CardFooter
                   className={cn(
                     "border-t p-8",
                     theme === "dark"
-                      ? "bg-gray-800 border-gray-700"
-                      : "bg-slate-50 border-slate-100"
+                      ? "bg-gray-800/50 border-t border-gray-700"
+                      : "bg-gray-100 border-t border-gray-200"
                   )}
                 >
                   <div
@@ -784,65 +781,65 @@ export default function ResumeUpload() {
                         variant="outline"
                         disabled={uploading}
                         className={cn(
-                          "px-6 py-3 rounded-xl font-medium",
+                          "px-4 py-2 rounded-lg font-semibold",
                           theme === "dark"
-                            ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                            : "border-slate-300 text-slate-700 hover:bg-slate-100"
+                            ? "border-gray-700 bg-gray-800 text-gray-200 hover:bg-gray-700"
+                            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
                         )}
-                        aria-label="Go back to previous step"
+                        aria-label="Previous step"
                       >
                         Back
                       </Button>
                     )}
+
                     {currentStep < 3 ? (
                       <Button
                         onClick={currentStep === 1 && file ? () => setCurrentStep(2) : handleUpload}
                         disabled={(currentStep === 1 && !file) || uploading}
                         className={cn(
-                          "px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200",
+                          "px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300",
                           theme === "dark"
-                            ? "bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white"
+                            ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white"
                             : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
                         )}
-                        aria-label={currentStep === 1 ? "Continue to configuration" : "Upload and process resume"}
+                        aria-label={currentStep === 1 ? "Continue to configuration" : "Upload and start interview"}
                       >
-                        {currentStep === 1 ? "Continue Setup" : "Start Processing"}
+                        {currentStep === 1 ? "Continue" : "Start Now"}
                       </Button>
                     ) : (
                       <Button
                         onClick={() =>
                           router.push(
-                            `/interview?resumeId=${file ? file.name.split(".")[0] : "unknown"}&duration=${interviewDuration}`
+                            `/interview?resumeId=${file ? encodeURIComponent(file.name.split(".")[0]) : ""}&duration=${interviewDuration}`
                           )
                         }
                         className={cn(
-                          "px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center space-x-2",
+                          "px-6 py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300 flex items-center space-x-2",
                           theme === "dark"
-                            ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white"
+                            ? "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white"
                             : "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
                         )}
-                        aria-label="Start the interview"
+                        aria-label="Begin interview"
                       >
                         <span>Begin Interview</span>
-                        <ArrowRight className="h-5 w-5" />
+                        <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     )}
                   </div>
+
                 </CardFooter>
               </Card>
             </motion.div>
           </div>
         </main>
-
-        {/* Footer */}
-        <footer className="px-6 py-6">
+        <footer className="py-6 px-4">
           <div
             className={cn(
-              "max-w-7xl mx-auto text-center text-sm",
-              theme === "dark" ? "text-gray-400" : "text-slate-500"
+              "max-w-full mx-auto text-center text-sm font-medium",
+              theme === "dark" ? "text-gray-400" : "text-gray-500"
             )}
           >
-            Powered by DeepHire AI • Enterprise-grade security • Your data is processed with the highest privacy standards
+            Powered by DeepHire AI • Enterprise-grade security • Your data is processed with top-tier privacy standards
           </div>
         </footer>
       </div>
