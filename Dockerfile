@@ -1,11 +1,16 @@
 # Use official Python image for backend
 FROM python:latest
 
-# Install Node.js (for frontend) and other dependencies
-RUN apt-get update && apt-get install -y curl gnupg && \
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean
+# Install Node.js (for frontend) and build dependencies for PyAudio
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    portaudio19-dev \
+    build-essential \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +22,7 @@ COPY frontend ./frontend
 # Install Python dependencies
 WORKDIR /app/backend
 COPY backend/requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Install frontend dependencies
 WORKDIR /app/frontend
