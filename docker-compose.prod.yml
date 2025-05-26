@@ -19,10 +19,10 @@ services:
 
   app:
     build:
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
       context: .
     env_file:
-      - ./backend/.env       # <---- Correct path here
+      - ./backend/.env     
     ports:
       - 8000:8000
 
