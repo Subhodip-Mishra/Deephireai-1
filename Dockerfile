@@ -15,9 +15,8 @@ COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
 
-WORKDIR /app/frontend
-COPY frontend/package*.json ./
-RUN npm install
+# Install frontend dependencies
+RUN npm install --prefix frontend
 
 RUN npm install -g concurrently
 
