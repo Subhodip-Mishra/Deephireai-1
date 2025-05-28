@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  frontend:
+    build: ./frontend
+    container_name: ai_project-frontend-1
+    ports:
+      - "3000:3000"
+    networks:
+      - deephire
+  backend:
+    build: ./backend
+    container_name: ai_project-backend-1
+    ports:
+      - "8000:8000"
+    networks:
+      - deephire
+    depends_on:
+      - mongo
+      - qdrant
+    env_file:
+      - ./backend/.env
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27018:27017"  # Changed to 27018 to avoid conflict
+    networks:
+      - deephire
+    volumes:
+      - ~/opt/data:/data/db
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+    networks:
+      - deephire
+    volumes:
+      - ~/opt/qdrant:/qdrant/storage
+networks:
+  deephire:
+    driver: bridge
