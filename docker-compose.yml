@@ -7,6 +7,9 @@ services:
       - "3000:3000"
     networks:
       - deephire
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+
   backend:
     build: ./backend
     container_name: ai_project-backend-1
@@ -19,15 +22,17 @@ services:
       - qdrant
     env_file:
       - ./backend/.env
+
   mongo:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - "27018:27017"  # Changed to 27018 to avoid conflict
+      - "27018:27017"
     networks:
       - deephire
     volumes:
       - ~/opt/data:/data/db
+
   qdrant:
     image: qdrant/qdrant:latest
     container_name: qdrant
@@ -37,6 +42,7 @@ services:
       - deephire
     volumes:
       - ~/opt/qdrant:/qdrant/storage
+
 networks:
   deephire:
     driver: bridge

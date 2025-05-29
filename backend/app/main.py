@@ -51,11 +51,12 @@ if not MONGODB_URI:
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "http://3.109.129.46:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Initialize OpenAI client
 client = OpenAI(api_key=OPENAI_API_KEY)

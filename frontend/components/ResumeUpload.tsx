@@ -71,47 +71,51 @@ export default function ResumeUpload() {
     return interval;
   };
 
-  const handleUpload = async () => {
-    if (!file) {
-      toast.error("No file selected. Please upload a PDF resume.");
-      return;
-    }
+  const BACKEND_URL = process.env.NODE_ENV === "development"
+  ? "http://localhost:8000"
+  : "http://3.109.129.46:8000"; // replace with your Ubuntu/AWS server IP
 
-    setUploading(true);
-    const progressInterval = simulateProgress();
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("duration", interviewDuration);
+const handleUpload = async () => {
+  if (!file) {
+    toast.error("No file selected. Please upload a PDF resume.");
+    return;
+  }
 
-    try {
-      const res = await fetch("http://localhost:8000/upload", {
-        method: "POST",
-        body: formData,
-      });
+  setUploading(true);
+  const progressInterval = simulateProgress();
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("duration", interviewDuration);
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.detail || "Failed to upload resume");
-      }
+  try {
+    const res = await fetch(`${BACKEND_URL}/upload`, {
+      method: "POST",
+      body: formData,
+    });
 
+    if (!res.ok) {
       const data = await res.json();
-      clearInterval(progressInterval);
-      setUploadProgress(100);
-      toast.success("Resume uploaded successfully!");
-      setCurrentStep(3);
-
-      setTimeout(() => {
-        router.push(`/interview?resumeId=${data.resume_id}&duration=${interviewDuration}`);
-      }, 2000);
-    } catch (err) {
-      clearInterval(progressInterval);
-      setUploadProgress(0);
-      const errorMessage = err instanceof Error ? err.message : "Something went wrong during upload.";
-      toast.error(errorMessage);
-    } finally {
-      setUploading(false);
+      throw new Error(data.detail || "Failed to upload resume");
     }
-  };
+
+    const data = await res.json();
+    clearInterval(progressInterval);
+    setUploadProgress(100);
+    toast.success("Resume uploaded successfully!");
+    setCurrentStep(3);
+
+    setTimeout(() => {
+      router.push(`/interview?resumeId=${data.resume_id}&duration=${interviewDuration}`);
+    }, 2000);
+  } catch (err) {
+    clearInterval(progressInterval);
+    setUploadProgress(0);
+    const errorMessage = err instanceof Error ? err.message : "Something went wrong during upload.";
+    toast.error(errorMessage);
+  } finally {
+    setUploading(false);
+  }
+};
 
   const handleClear = (e: React.SyntheticEvent) => {
     e.stopPropagation();
