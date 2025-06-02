@@ -71,9 +71,7 @@ export default function ResumeUpload() {
     return interval;
   };
 
-  const BACKEND_URL = process.env.NODE_ENV === "development"
-  ? "http://localhost:8000"
-  : "http://3.109.129.46:8000"; // replace with your Ubuntu/AWS server IP
+  
 
 const handleUpload = async () => {
   if (!file) {
@@ -88,7 +86,7 @@ const handleUpload = async () => {
   formData.append("duration", interviewDuration);
 
   try {
-    const res = await fetch(`${BACKEND_URL}/upload`, {
+    const res = await fetch(`/upload`, {
       method: "POST",
       body: formData,
     });
@@ -679,7 +677,7 @@ const handleUpload = async () => {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5 }}
                       className="text-center space-y-6"
-                    >
+                    >i
                       <div
                         className={cn(
                           "p-6 rounded-2xl border",
@@ -700,7 +698,6 @@ const handleUpload = async () => {
                         </div>
                         <h3
                           className={cn(
-                            "text-2xl font-bold mb-2",
                             theme === "dark" ? "text-white" : "text-gray-800"
                           )}
                         >

@@ -140,7 +140,7 @@ export default function InterviewPage() {
 
   const playAudio = (audioUrl: string) => {
     if (audioRef.current && !isMuted) {
-      audioRef.current.src = `http://localhost:8000${audioUrl}`;
+      audioRef.current.src = `${audioUrl}`;
       audioRef.current.play().catch((err) => {
         console.error("Audio playback failed:", err);
         toast.error("Failed to play audio response.", { style: getToastStyle(theme || "dark") });
@@ -181,7 +181,7 @@ export default function InterviewPage() {
   const startInterview = async () => {
     setLoadingContext(true);
     try {
-      const res = await fetch(`http://localhost:8000/interview/${resumeId}`, {
+      const res = await fetch(`/interview/${resumeId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -206,7 +206,7 @@ export default function InterviewPage() {
 
   const fetchInterviewSummary = async (retries = 3, delay = 2000): Promise<void> => {
     try {
-      const res = await fetch(`http://localhost:8000/summary/${resumeId}`, {
+      const res = await fetch(`/summary/${resumeId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -328,7 +328,7 @@ export default function InterviewPage() {
 
           // Add user's voice input to chat log (as transcribed by the server)
           try {
-            const res = await fetch(`http://localhost:8000/voice-chat/${resumeId}`, {
+            const res = await fetch(`/voice-chat/${resumeId}`, {
               method: "POST",
               body: formData,
             });
@@ -407,7 +407,7 @@ export default function InterviewPage() {
     setChatLog((prev) => [...prev, userMessage]);
 
     try {
-      const res = await fetch(`http://localhost:8000/chat/${resumeId}`, {
+      const res = await fetch(`/chat/${resumeId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: endInterview || question, thread_id: resumeId }),
@@ -457,7 +457,7 @@ export default function InterviewPage() {
     setIsAnalyzing(true);
 
     try {
-      const res = await fetch(`http://localhost:8000/chat/${resumeId}`, {
+      const res = await fetch(`/chat/${resumeId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: "end interview", thread_id: resumeId }),

@@ -51,13 +51,20 @@ if not MONGODB_URI:
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://3.109.129.46:3000"],
+    allow_origins=[ 
+	"https://www.deephireai.site",
+        "https://deephireai.site",
+        "http://localhost:3000",  # For local development
+        "http://127.0.0.1:3000",  # For local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 # Initialize OpenAI client
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -74,7 +81,7 @@ async def custom_exception_handler(request, exc):
     return JSONResponse(
         status_code=500,
         content={"detail": f"Internal server error: {str(exc)}"},
-        headers={"Access-Control-Allow-Origin": "http://localhost:3000"}
+        headers={"Access-Control-Allow-Origin": "https://www.deephireai.site"}
     )
 
 system_prompts = [

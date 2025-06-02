@@ -1,1 +1,7 @@
 *.env
+venv/
+*.out
+backend/audio_responses/*.mp3
+__pycache__/
+*.pyc
+node_modules/
